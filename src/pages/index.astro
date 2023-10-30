@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Guitarra from '../components/Guitarra.astro'
 import Post from '../components/Post.astro'
 import Curso from '../components/Curso.astro'
+import ComponenteReact from '../components/ComponenteReact'
 
 const urlGuitarras = `${import.meta.env.PUBLIC_API_URL}/guitarras?populate=imagen`;
 const urlBlog = `${import.meta.env.PUBLIC_API_URL}/posts?populate=imagen`;
@@ -43,6 +44,13 @@ const [{ data: guitarras }, { data: posts }, { data: curso }] = await Promise.al
 		contenido={curso.attributes.contenido}
 		imagen={curso.attributes.imagen.data.attributes.url}
 	/>
+
+	{/*Por Default solo carga en el servidor*/}
+	<ComponenteReact />
+	{/*De esta otra forma carga tanto en cliente como en servidor*/}
+	<ComponenteReact client:load />
+	{/*Carga solo en el Cliente*/}
+	<ComponenteReact client:only />
 
 	<section class="contenedor">
 		<h2 class="heading">Blog</h2>
